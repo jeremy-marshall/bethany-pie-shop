@@ -55,4 +55,34 @@
         </nav>
     </footer>
 </body>
+<script>
+    /* Want scipt to run when page loads so below line creates listener when DOM is loaded */
+    window.addEventListener("DOMContentLoaded", function(e) {
+        /* */
+        const orderButton = document.querySelectorAll("button[data-order]");
+
+        /* */
+        orderButton.forEach(function(button) {
+
+            /* When we click on button. Want to run JavaScript. Below listener does that */
+            button.addEventListener("click", function(e) {
+                const button = e.currentTarget;
+                const container = button.parentNode;
+
+                const order = {
+                    id: button.getAttribute("data-order"),
+                    title: container.querySelector(".title").innerText,
+                    price: container.querySelector(".price").innerText,
+                    desc: container.querySelector(".desc").innerText,
+                };
+
+                localStorage.setItem("order", JSON.stringify(order));
+
+                const url = window.location.href.replace("pies.html", "order.html");
+                window.location.href = url;
+
+            });
+        });
+    });
+</script>
 </html>
